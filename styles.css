@@ -160,9 +160,9 @@ ul {
 
 .gold-button {
   background: linear-gradient(135deg, 
-    var(--gold-luxury) 0%, 
-    var(--gold-rich) 50%, 
-    var(--gold-darker) 100%
+    #6E5B1D 0%, 
+    #C9A633 50%, 
+    #6E5B1D 100%
   );
   color: var(--dark);
   font-weight: 600;
@@ -438,6 +438,9 @@ ul {
   .hero-image {
     width: 50%;
   }
+  .hero-gradient {
+    background: linear-gradient(to right, var(--dark), var(--dark) 30%, transparent);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -457,7 +460,7 @@ ul {
 .hero-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--dark), var(--dark) 30%, transparent);
+  background: linear-gradient(to right, var(--dark), transparent 50%, transparent);
 }
 
 .hero-content {
@@ -1165,5 +1168,41 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+}
+
+.story-image-container {
+  width: 100%;
+  height: 70%;
+  min-height: 600px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-gold);
+  margin-top: 95px;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.story-image:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 1024px) {
+  .story-image-container {
+    min-height: 400px;
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .story-image-container {
+    min-height: 300px;
+    height: 100%;
   }
 }
