@@ -790,18 +790,19 @@ ul {
 .testimonial-wrapper {
   position: relative;
   overflow: hidden;
-  height: 20rem;
+  height: auto;
+  min-height: 25rem;
 }
 
 @media (min-width: 640px) {
   .testimonial-wrapper {
-    height: 16rem;
+    min-height: 22rem;
   }
 }
 
 @media (min-width: 768px) {
   .testimonial-wrapper {
-    height: 15rem;
+    min-height: 20rem;
   }
 }
 
@@ -812,6 +813,9 @@ ul {
   opacity: 0;
   transform: translateX(100%);
   transition: all 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .testimonial.active {
@@ -831,6 +835,8 @@ ul {
   color: var(--gray-300);
   font-style: italic;
   margin-bottom: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .testimonial-author {
