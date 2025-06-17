@@ -498,7 +498,7 @@ ul {
   width: 100%;
   object-fit: cover;
   opacity: 0.9;
-  object-position: center;
+  object-position: right bottom;
 }
 
 .hero-gradient {

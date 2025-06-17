@@ -1,32 +1,31 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $phone = trim($_POST['phone'] ?? '');
-    $message = trim($_POST['message'] ?? '');
+    $to = 'info@marekivanka.cz'; // Změň na svůj e-mail
+    $subject = 'Zpráva z kontaktního formuláře';
 
-    // Basic validation
-    if ($name && filter_var($email, FILTER_VALIDATE_EMAIL) && $phone && $message) {
-        $to = 'info@marekivanka.cz';
-        $subject = 'Nová zpráva z kontaktního formuláře';
-        $headers = "From: $name <$email>\r\n";
-        $headers .= "Reply-To: $email\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        $body = "Jméno: $name\n";
-        $body .= "Email: $email\n";
-        $body .= "Telefon: $phone\n";
-        $body .= "Zpráva:\n$message\n";
+    // Encode subject for UTF-8
+    $encoded_subject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 
-        if (mail($to, $subject, $body, $headers)) {
-            echo '<h2>Děkujeme za zprávu!</h2><p>Vaše zpráva byla úspěšně odeslána. Ozveme se vám co nejdříve.</p>';
-        } else {
-            echo '<h2>Chyba při odesílání</h2><p>Omlouváme se, zprávu se nepodařilo odeslat. Zkuste to prosím později nebo nás kontaktujte přímo na info@marekivanka.cz.</p>';
-        }
+    // Sestavení těla zprávy
+    $body = "Jméno: " . $_POST['name'] . "\n";
+    $body .= "Email: " . $_POST['email'] . "\n";
+    $body .= "Telefon: " . $_POST['phone'] . "\n";
+    $body .= "Zpráva:\n" . $_POST['message'];
+
+    // Set headers for UTF-8
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
+    $headers .= "From: info@marekivanka.cz\r\n";
+    $headers .= "Reply-To: " . $_POST['email'] . "\r\n";
+
+    // Odeslání
+    if (mail($to, $encoded_subject, $body, $headers)) {
+        header('Location: dekujeme.html');
+        exit();
     } else {
-        echo '<h2>Neplatné údaje</h2><p>Vyplňte prosím všechna pole a zadejte platný email.</p>';
+        echo 'Chyba při odesílání.';
     }
 } else {
-    header('Location: index.html');
-    exit();
+    echo 'Neplatný požadavek.';
 }
-?> 
+?>
