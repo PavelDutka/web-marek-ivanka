@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $to = 'info@marekivanka.cz'; // Změň na svůj e-mail
+    $to = 'info@marekivanka.finance'; // Změň na svůj e-mail
     $subject = 'Zpráva z kontaktního formuláře';
 
     // Encode subject for UTF-8
